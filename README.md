@@ -11,7 +11,7 @@ Clone the repository and set up your environment:
 
 ```sh
 git clone https://github.com/vrwmiller/myip.git
-cd myip
+cd mytools
 source environment.sh
 ```
 
