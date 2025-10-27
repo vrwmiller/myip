@@ -94,6 +94,23 @@ source environment.sh
 </details>
 
 <details>
+  <summary><strong>random.py Usage</strong></summary>
+
+  Generate a random string with optional length and excluded characters:
+
+  ```sh
+  python random.py                # Default: 24 chars
+  python random.py --length 16    # Specify length (12-32)
+  python random.py --exclude "abc" # Exclude characters
+  random --length 20 --exclude "!@#" # Using alias
+  ```
+  Output:
+  ```text
+  Generated random string: 8f$Gz@1!kL... (example)
+  ```
+</details>
+
+<details>
   <summary><strong>myopen.sh Usage</strong></summary>
 
   ```sh
