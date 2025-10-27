@@ -6,4 +6,4 @@ pip install -r requirements.txt
 
 # Alias to run the tool easily
 alias myip='python myip.py'
-alias bandsintown='python bandsintown.py'
+alias bandsintown='python bandsintown.py --app_id mytools_app'
