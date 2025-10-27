@@ -10,6 +10,27 @@ This repository provides concise command-line tools for macOS, written in Python
 - **mediawiki.py** — Search Wikipedia and fetch page content.
 - **stoic.py** — Display a random Stoic quote from stoic-quotes.com.
 - **myopen.sh** — Launch multiple instances of a macOS application (where allowed).
+ - **weather.py** — Get US National Weather Service forecasts and current conditions.
+ - **myopen.sh** — Launch multiple instances of a macOS application (where allowed).
+### weather.py
+```sh
+python weather.py --lat 40.7128 --lon -74.0060
+python weather.py --station KJFK
+```
+Output (forecast):
+```text
+Forecast for (40.7128, -74.0060):
+Tonight: Mostly clear, with a low around 55. Northwest wind 5 to 7 mph.
+Monday: Sunny, with a high near 70. North wind 3 to 6 mph.
+...etc...
+```
+Output (current conditions):
+```text
+Current conditions at KJFK:
+Temperature: 18°C
+Wind: 270° at 5 m/s
+Description: Partly Cloudy
+```
 
 ## Requirements
 
