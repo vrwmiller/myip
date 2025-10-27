@@ -9,6 +9,21 @@ This repository contains several Python command-line tools for querying public A
 - **bandsintown.py**: Query artist information and events using the Bandsintown Public API.
 - **mediawiki.py**: Search Wikipedia and fetch page content using the MediaWiki Action API.
 - **stoic.py**: Get a random Stoic quote from stoic-quotes.com API.
+- **myopen.sh**: Launch multiple instances of a macOS application (including system apps, where possible).
+---
+
+### myopen.sh
+
+Launch a new instance of a macOS application. Useful for apps that normally restrict to a single instance.
+
+```sh
+myopen Calculator
+myopen Safari
+```
+
+Note: Some system apps (like Calculator) may be restricted by macOS and may not allow multiple instances due to security constraints.
+
+---
 
 ---
 
