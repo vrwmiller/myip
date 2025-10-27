@@ -1,5 +1,25 @@
+
 import requests
 import argparse
+
+def geocode_city_state(city, state):
+    url = "https://nominatim.openstreetmap.org/search"
+    params = {
+        "city": city,
+        "state": state,
+        "country": "USA",
+        "format": "json",
+        "limit": 1
+    }
+    r = requests.get(url, params=params, headers={"User-Agent": "weather.py (github.com/vrwmiller/mytools)"})
+    r.raise_for_status()
+    results = r.json()
+    if results:
+        lat = float(results[0]["lat"])
+        lon = float(results[0]["lon"])
+        return lat, lon
+    else:
+        raise ValueError(f"Could not geocode city/state: {city}, {state}")
 
 BASE_URL = "https://api.weather.gov"
 
@@ -42,18 +62,29 @@ def main():
     parser = argparse.ArgumentParser(description="Get weather info from the US National Weather Service API")
     parser.add_argument("--lat", type=float, help="Latitude for forecast or station list")
     parser.add_argument("--lon", type=float, help="Longitude for forecast or station list")
+    parser.add_argument("--city", type=str, help="City for location lookup")
+    parser.add_argument("--state", type=str, help="State for location lookup")
     parser.add_argument("--station", type=str, help="Station ID for current conditions (e.g., KJFK)")
-    parser.add_argument("--list-stations", action="store_true", help="List stations for given lat/lon")
+    parser.add_argument("--list-stations", action="store_true", help="List stations for given location")
     args = parser.parse_args()
 
-    if args.list_stations and args.lat is not None and args.lon is not None:
-        _, _, _, stations_url = get_grid_points(args.lat, args.lon)
-        print(f"Stations near ({args.lat}, {args.lon}):")
+    lat, lon = args.lat, args.lon
+    # If city/state provided, geocode to get lat/lon
+    if args.city and args.state:
+        try:
+            lat, lon = geocode_city_state(args.city, args.state)
+        except Exception as e:
+            print(e)
+            return
+
+    if args.list_stations and lat is not None and lon is not None:
+        _, _, _, stations_url = get_grid_points(lat, lon)
+        print(f"Stations near ({lat}, {lon}):")
         list_stations(stations_url)
-    elif args.lat is not None and args.lon is not None:
-        grid_id, grid_x, grid_y, _ = get_grid_points(args.lat, args.lon)
+    elif lat is not None and lon is not None:
+        grid_id, grid_x, grid_y, _ = get_grid_points(lat, lon)
+        print(f"Forecast for ({lat}, {lon}):")
         forecast = get_forecast(grid_id, grid_x, grid_y)
-        print(f"Forecast for ({args.lat}, {args.lon}):")
         for period in forecast:
             print(f"{period['name']}: {period['detailedForecast']}")
     elif args.station:
