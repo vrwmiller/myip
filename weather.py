@@ -20,7 +20,9 @@ def list_stations(stations_url):
     stations = r.json()["features"]
     for s in stations:
         props = s["properties"]
-        print(f"{props['stationIdentifier']}: {props['name']} ({props['latitude']}, {props['longitude']})")
+        lat = props.get('latitude', 'N/A')
+        lon = props.get('longitude', 'N/A')
+        print(f"{props['stationIdentifier']}: {props['name']} ({lat}, {lon})")
 
 # Get forecast for grid points
 def get_forecast(grid_id, grid_x, grid_y):
