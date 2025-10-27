@@ -1,75 +1,73 @@
 
-# mytools project
+# mytools
 
+This repository contains several Python command-line tools for querying public APIs and fetching useful information.
 
-This repository contains Python scripts:
+## Tools
 
-- `myip.py`: Query your public IPv4 and IPv6 addresses using MyIP.com and ipify APIs.
-- `bandsintown.py`: Query artist information and events using the Bandsintown Public API.
-- `mediawiki.py`: Search Wikipedia and fetch page content using the MediaWiki Action API.
-- `stoic.py`: Get a random Stoic quote from stoic-quotes.com API.
-### stoic.py
-Get a random Stoic quote:
-```sh
-python stoic.py
-```
-Example output:
-```
-"Waste no more time arguing what a good man should be. Be one."
--- Marcus Aurelius
-```
+- **myip.py**: Query your public IPv4 and IPv6 addresses using MyIP.com and ipify APIs.
+- **bandsintown.py**: Query artist information and events using the Bandsintown Public API.
+- **mediawiki.py**: Search Wikipedia and fetch page content using the MediaWiki Action API.
+- **stoic.py**: Get a random Stoic quote from stoic-quotes.com API.
 
-
-## Features
-
-### myip.py
-- Shows your public IPv4 and IPv6 addresses
-- Displays country and country code (from MyIP.com)
-
-### bandsintown.py
-- Fetches artist information (profile, photo, tracker count, etc.)
-- Lists artist events (upcoming, past, or by date range)
+---
 
 ## Requirements
+
 - Python 3.7+
 - `requests` library
 
+---
+
 ## Setup
+
 1. Clone the repository:
-	```sh
-	git clone https://github.com/vrwmiller/myip.git
-	cd myip
-	```
+
+    ```sh
+    git clone https://github.com/vrwmiller/myip.git
+    cd myip
+    ```
+
 2. Create and activate a virtual environment (recommended):
-	You can run the provided setup script:
-	```sh
-	source environment.sh
-	```
 
-	**Note:** If you already have the `requests` library installed globally, you can skip the virtual environment setup and run the script directly.
+    ```sh
+    source environment.sh
+    ```
 
+    **Note:** If you already have the `requests` library installed globally, you can skip the virtual environment setup and run the script directly.
+
+---
 
 ## Usage
 
 ### myip.py
-Run the script:
+
+Shows your public IPv4 and IPv6 addresses, country, and country code.
+
 ```sh
 python myip.py
 ```
+
 Example output:
+
 ```
 MyIP.com: fd00::1 (United States, US)
 ipify IPv4: 192.168.1.1
 ipify IPv6: fd00::1
 ```
 
+---
 
 ### bandsintown.py
-Set your Bandsintown `app_id` in the script, then run:
+
+Fetches artist information and lists events (upcoming, past, or by date range).
+
 ```sh
 python bandsintown.py --app_id bandsintown@gmail.com --artist "tool"
 ```
+
 Example output:
+
 ```
 Artist Info:
 { ...artist info JSON... }
@@ -78,13 +76,19 @@ Upcoming Events:
 [{ ...event JSON... }, ...]
 ```
 
+---
+
 ### mediawiki.py
-Search Wikipedia or fetch page content:
+
+Search Wikipedia or fetch page content.
+
 ```sh
 python mediawiki.py --search "Python programming" --limit 2
 python mediawiki.py --pageid 23862
 ```
+
 Example output:
+
 ```
 Title: Python (programming language)
 PageID: 23862
@@ -93,5 +97,25 @@ Snippet: ...
 <page content>
 ```
 
+---
+
+### stoic.py
+
+Get a random Stoic quote.
+
+```sh
+python stoic.py
+```
+
+Example output:
+
+```
+"Waste no more time arguing what a good man should be. Be one."
+-- Marcus Aurelius
+```
+
+---
+
 ## License
+
 MIT
