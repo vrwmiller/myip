@@ -7,3 +7,4 @@ pip install -r requirements.txt
 # Alias to run the tool easily
 alias myip='python myip.py'
 alias bandsintown='python bandsintown.py --app_id bandsintown@gmail.com'
+alias mediawiki='python mediawiki.py'
