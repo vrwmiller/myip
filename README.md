@@ -10,56 +10,8 @@ This repository provides concise command-line tools for macOS, written in Python
 - **mediawiki.py** — Search Wikipedia and fetch page content.
 - **stoic.py** — Display a random Stoic quote from stoic-quotes.com.
 - **myopen.sh** — Launch multiple instances of a macOS application (where allowed).
- - **weather.py** — Get US National Weather Service forecasts and current conditions.
- - **myopen.sh** — Launch multiple instances of a macOS application (where allowed).
-
-### weather.py
-
-
-Get a forecast, current conditions, or list nearby stations by coordinates or city/state:
-
-```sh
-# By coordinates
-python weather.py --lat 40.7128 --lon -74.0060           # Get forecast
-python weather.py --station KJFK                         # Get current conditions
-python weather.py --lat 40.7128 --lon -74.0060 --list-stations   # List stations near location
-
-# By city and state
-python weather.py --city "New York" --state NY           # Get forecast for New York, NY
-python weather.py --city "New York" --state NY --list-stations   # List stations near New York, NY
-```
-
-Output (forecast):
-```text
-Forecast for (40.7128, -74.0060):
-Tonight: Mostly clear, with a low around 55. Northwest wind 5 to 7 mph.
-Monday: Sunny, with a high near 70. North wind 3 to 6 mph.
-...etc...
-```
-
-Output (current conditions):
-```text
-Current conditions at KJFK:
-Temperature: 18°C / 64°F
-Wind: 270° at 5 m/s
-Description: Partly Cloudy
-```
-
-Output (station list):
-```text
-Stations near (40.7128, -74.0060):
-KNYC: Central Park (40.782, -73.965)
-KJFK: John F Kennedy International Airport (40.6398, -73.7789)
-...etc...
-```
-
-## Requirements
-
-- Python 3.7 or newer
-
-# mytools
-
-Command-line tools for macOS to query public APIs and automate common tasks.
+- **weather.py** — Get US National Weather Service forecasts and current conditions.
+- **myopen.sh** — Launch multiple instances of a macOS application (where allowed).
 
 ## Requirements
 
@@ -77,15 +29,6 @@ source environment.sh
 ```
 
 *If you already have the `requests` library installed globally, you can skip the virtual environment setup.*
-
-## Tools
-
-- **myip.py** — Get your public IPv4/IPv6 address and location info.
-- **bandsintown.py** — Look up artist info and events from Bandsintown.
-- **mediawiki.py** — Search Wikipedia and fetch page content.
-- **stoic.py** — Display a random Stoic quote from stoic-quotes.com.
-- **weather.py** — Get US National Weather Service forecasts, current conditions, and list stations by coordinates or city/state.
-- **myopen.sh** — Launch multiple instances of a macOS application (where allowed).
 
 ## Usage
 
