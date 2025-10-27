@@ -4,7 +4,7 @@ import argparse
 import random
 import string
 
-def generate_random_string(length=24, exclude_chars=""):
+def generate_random_string(length=32, exclude_chars=""):
     all_chars = string.ascii_letters + string.digits + string.punctuation
     if exclude_chars:
         all_chars = ''.join(char for char in all_chars if char not in exclude_chars)
@@ -17,8 +17,8 @@ def generate_random_string(length=24, exclude_chars=""):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a random string.")
     parser.add_argument(
-        '-l', '--length', type=int, default=24,
-        help="Length of the random string (default: 24, min: 12, max: 32)"
+        '-l', '--length', type=int, default=32,
+        help="Length of the random string (default: 32, min: 12, max: 64)"
     )
     parser.add_argument(
         '-e', '--exclude', type=str, default="",
@@ -27,8 +27,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-    if not 12 <= args.length <= 32:
-        raise ValueError("Length must be between 12 and 32.")
+    if not 12 <= args.length <= 64:
+        raise ValueError("Length must be between 12 and 64.")
     
     random_string = generate_random_string(length=args.length, exclude_chars=args.exclude)
     print(f"Generated random string: {random_string}")
