@@ -115,6 +115,22 @@ source environment.sh
 </details>
 
 <details>
+  <summary><strong>csvtransform.py Usage</strong></summary>
+
+  Transform a CSV file by rearranging columns and separating debit/credit amounts:
+
+  ```sh
+  python csvtransform.py -i input.csv -o output.csv
+  python csvtransform.py --input input.csv --output output.csv
+  csvtransform -i input.csv -o output.csv   # Using alias
+  ```
+  Output:
+  ```text
+  Transformed data has been written to output.csv
+  ```
+</details>
+
+<details>
   <summary><strong>myopen.sh Usage</strong></summary>
 
   ```sh
