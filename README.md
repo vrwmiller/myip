@@ -1,9 +1,6 @@
 ## Requirements
 - Python 3.7 or newer
 - `requests` Python library
-## Requirements
-- Python 3.7 or newer
-- `requests` Python library
 
 ## Setup
 
