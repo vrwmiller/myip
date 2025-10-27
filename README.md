@@ -1,10 +1,12 @@
 
 # mytools project
 
-This repository contains two Python scripts:
+
+This repository contains Python scripts:
 
 - `myip.py`: Query your public IPv4 and IPv6 addresses using MyIP.com and ipify APIs.
 - `bandsintown.py`: Query artist information and events using the Bandsintown Public API.
+- `mediawiki.py`: Search Wikipedia and fetch page content using the MediaWiki Action API.
 
 
 ## Features
@@ -50,10 +52,11 @@ ipify IPv4: 192.168.1.1
 ipify IPv6: fd00::1
 ```
 
+
 ### bandsintown.py
 Set your Bandsintown `app_id` in the script, then run:
 ```sh
-python bandsintown.py
+python bandsintown.py --app_id bandsintown@gmail.com --artist "tool"
 ```
 Example output:
 ```
@@ -62,6 +65,21 @@ Artist Info:
 
 Upcoming Events:
 [{ ...event JSON... }, ...]
+```
+
+### mediawiki.py
+Search Wikipedia or fetch page content:
+```sh
+python mediawiki.py --search "Python programming" --limit 2
+python mediawiki.py --pageid 23862
+```
+Example output:
+```
+Title: Python (programming language)
+PageID: 23862
+Snippet: ...
+
+<page content>
 ```
 
 ## License
