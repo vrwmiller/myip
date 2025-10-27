@@ -103,10 +103,27 @@ source environment.sh
   Generate a random string with optional length and excluded characters:
 
   ```sh
-  python randomstr.py                # Default: 24 chars
-  python randomstr.py --length 16    # Specify length (12-32)
+  python randomstr.py                # Default: 32 chars
+  python randomstr.py --length 16    # Specify length (12-64)
   python randomstr.py --exclude "abc" # Exclude characters
-  random --length 20 --exclude "!@#" # Using alias
+  randomstr --length 20 --exclude "!@#" # Using alias
+  ```
+  Output:
+  ```text
+  Generated random string: 8f$Gz@1!kL... (example)
+  ```
+</details>
+
+<details>
+  <summary><strong>randomstr.sh Usage</strong></summary>
+
+  Generate a random string with optional length and excluded characters:
+
+  ```sh
+  ./randomstr.sh                # Default: 32 chars
+  ./randomstr.sh -l 16          # Specify length (12-64)
+  ./randomstr.sh -e "abc"       # Exclude characters
+  randomstrsh -l 20 -e "!@#"    # Using alias
   ```
   Output:
   ```text
