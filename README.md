@@ -1,5 +1,5 @@
 
-# myip project
+# mytools project
 
 This repository contains two Python scripts:
 
