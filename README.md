@@ -7,6 +7,17 @@ This repository contains Python scripts:
 - `myip.py`: Query your public IPv4 and IPv6 addresses using MyIP.com and ipify APIs.
 - `bandsintown.py`: Query artist information and events using the Bandsintown Public API.
 - `mediawiki.py`: Search Wikipedia and fetch page content using the MediaWiki Action API.
+- `stoic.py`: Get a random Stoic quote from stoic-quotes.com API.
+### stoic.py
+Get a random Stoic quote:
+```sh
+python stoic.py
+```
+Example output:
+```
+"Waste no more time arguing what a good man should be. Be one."
+-- Marcus Aurelius
+```
 
 
 ## Features

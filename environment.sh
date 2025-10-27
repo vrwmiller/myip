@@ -8,3 +8,4 @@ pip install -r requirements.txt
 alias myip='python myip.py'
 alias bandsintown='python bandsintown.py --app_id bandsintown@gmail.com'
 alias mediawiki='python mediawiki.py'
+alias stoic='python stoic.py'
