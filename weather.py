@@ -70,6 +70,7 @@ def main():
     parser.add_argument("--state", type=str, help="State for location lookup")
     parser.add_argument("--station", type=str, help="Station ID for current conditions (e.g., KJFK)")
     parser.add_argument("--list-stations", action="store_true", help="List stations for given location")
+    parser.add_argument("--days", type=int, default=1, help="Number of days to get forecast for (default: 1, min: 1, max: 10)")
     args = parser.parse_args()
 
     lat, lon = args.lat, args.lon
@@ -90,7 +91,12 @@ def main():
         print(f"Forecast for ({lat}, {lon}):")
         forecast = get_forecast(grid_id, grid_x, grid_y)
         width = shutil.get_terminal_size((80, 20)).columns
-        for period in forecast:
+        # NWS API returns periods (usually 2 per day: day/night)
+        # We'll take 2*days periods if available
+        if not 1 <= args.days <= 10:
+            raise ValueError("--days must be between 1 and 10.")
+        periods = forecast[:2*args.days]
+        for period in periods:
             line = f"{period['name']}: {period['detailedForecast']}"
             print(textwrap.fill(line, width=width, subsequent_indent='    '))
     elif args.station:
