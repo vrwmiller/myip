@@ -12,7 +12,15 @@ def get_grid_points(lat, lon):
     grid_id = data["properties"]["gridId"]
     grid_x = data["properties"]["gridX"]
     grid_y = data["properties"]["gridY"]
-    return grid_id, grid_x, grid_y
+    stations_url = data["properties"]["observationStations"]
+    return grid_id, grid_x, grid_y, stations_url
+def list_stations(stations_url):
+    r = requests.get(stations_url, headers={"User-Agent": "weather.py (github.com/vrwmiller/mytools)"})
+    r.raise_for_status()
+    stations = r.json()["features"]
+    for s in stations:
+        props = s["properties"]
+        print(f"{props['stationIdentifier']}: {props['name']} ({props['latitude']}, {props['longitude']})")
 
 # Get forecast for grid points
 def get_forecast(grid_id, grid_x, grid_y):
@@ -30,13 +38,18 @@ def get_station_observation(station_id):
 
 def main():
     parser = argparse.ArgumentParser(description="Get weather info from the US National Weather Service API")
-    parser.add_argument("--lat", type=float, help="Latitude for forecast")
-    parser.add_argument("--lon", type=float, help="Longitude for forecast")
+    parser.add_argument("--lat", type=float, help="Latitude for forecast or station list")
+    parser.add_argument("--lon", type=float, help="Longitude for forecast or station list")
     parser.add_argument("--station", type=str, help="Station ID for current conditions (e.g., KJFK)")
+    parser.add_argument("--list-stations", action="store_true", help="List stations for given lat/lon")
     args = parser.parse_args()
 
-    if args.lat is not None and args.lon is not None:
-        grid_id, grid_x, grid_y = get_grid_points(args.lat, args.lon)
+    if args.list_stations and args.lat is not None and args.lon is not None:
+        _, _, _, stations_url = get_grid_points(args.lat, args.lon)
+        print(f"Stations near ({args.lat}, {args.lon}):")
+        list_stations(stations_url)
+    elif args.lat is not None and args.lon is not None:
+        grid_id, grid_x, grid_y, _ = get_grid_points(args.lat, args.lon)
         forecast = get_forecast(grid_id, grid_x, grid_y)
         print(f"Forecast for ({args.lat}, {args.lon}):")
         for period in forecast:
