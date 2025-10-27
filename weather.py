@@ -1,6 +1,8 @@
 
 import requests
 import argparse
+import shutil
+import textwrap
 
 def geocode_city_state(city, state):
     url = "https://nominatim.openstreetmap.org/search"
@@ -38,11 +40,13 @@ def list_stations(stations_url):
     r = requests.get(stations_url, headers={"User-Agent": "weather.py (github.com/vrwmiller/mytools)"})
     r.raise_for_status()
     stations = r.json()["features"]
+    width = shutil.get_terminal_size((80, 20)).columns
     for s in stations:
         props = s["properties"]
         lat = props.get('latitude', 'N/A')
         lon = props.get('longitude', 'N/A')
-        print(f"{props['stationIdentifier']}: {props['name']} ({lat}, {lon})")
+        line = f"{props['stationIdentifier']}: {props['name']} ({lat}, {lon})"
+        print(textwrap.fill(line, width=width, subsequent_indent='    '))
 
 # Get forecast for grid points
 def get_forecast(grid_id, grid_x, grid_y):
@@ -85,19 +89,25 @@ def main():
         grid_id, grid_x, grid_y, _ = get_grid_points(lat, lon)
         print(f"Forecast for ({lat}, {lon}):")
         forecast = get_forecast(grid_id, grid_x, grid_y)
+        width = shutil.get_terminal_size((80, 20)).columns
         for period in forecast:
-            print(f"{period['name']}: {period['detailedForecast']}")
+            line = f"{period['name']}: {period['detailedForecast']}"
+            print(textwrap.fill(line, width=width, subsequent_indent='    '))
     elif args.station:
         obs = get_station_observation(args.station)
         print(f"Current conditions at {args.station}:")
+        width = shutil.get_terminal_size((80, 20)).columns
         temp_c = obs['temperature']['value']
         temp_f = temp_c * 9/5 + 32 if temp_c is not None else None
         if temp_c is not None:
-            print(f"Temperature: {temp_c:.1f}°C / {temp_f:.1f}°F")
+            line = f"Temperature: {temp_c:.1f}°C / {temp_f:.1f}°F"
+            print(textwrap.fill(line, width=width, subsequent_indent='    '))
         else:
-            print("Temperature: N/A")
-        print(f"Wind: {obs['windDirection']['value']}° at {obs['windSpeed']['value']} m/s")
-        print(f"Description: {obs['textDescription']}")
+            print(textwrap.fill("Temperature: N/A", width=width, subsequent_indent='    '))
+        wind_line = f"Wind: {obs['windDirection']['value']}° at {obs['windSpeed']['value']} m/s"
+        print(textwrap.fill(wind_line, width=width, subsequent_indent='    '))
+        desc_line = f"Description: {obs['textDescription']}"
+        print(textwrap.fill(desc_line, width=width, subsequent_indent='    '))
     else:
         parser.print_help()
 
