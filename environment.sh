@@ -11,5 +11,5 @@ alias mediawiki='python mediawiki.py'
 alias stoic='python stoic.py'
 alias myopen='./myopen.sh'
 alias weather='python weather.py'
-
+alias randomstr='python randomstr.py'
 alias randomstrsh='./randomstr.sh'
