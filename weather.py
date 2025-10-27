@@ -44,7 +44,12 @@ def main():
     elif args.station:
         obs = get_station_observation(args.station)
         print(f"Current conditions at {args.station}:")
-        print(f"Temperature: {obs['temperature']['value']}°C")
+        temp_c = obs['temperature']['value']
+        temp_f = temp_c * 9/5 + 32 if temp_c is not None else None
+        if temp_c is not None:
+            print(f"Temperature: {temp_c:.1f}°C / {temp_f:.1f}°F")
+        else:
+            print("Temperature: N/A")
         print(f"Wind: {obs['windDirection']['value']}° at {obs['windSpeed']['value']} m/s")
         print(f"Description: {obs['textDescription']}")
     else:
