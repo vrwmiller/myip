@@ -38,6 +38,45 @@ source environment.sh
 </details>
 
 <details>
+<summary>jira.py - Search Jira issues</summary>
+
+**Usage:**
+
+```sh
+jira.py --project ABC --summary "*deploy to prod*" --format json --output-file results.json
+```
+
+**Options:**
+
+- `--project` Project key (e.g. ABC)
+- `--reporter` Reporter username
+- `--summary` Summary pattern (wildcards supported)
+- `--log-file` Log file path (default: jira.py.log)
+- `--debug` Enable debug logging to STDOUT
+- `--max-results` Page size (maxResults per request)
+- `--output-file` Write results to file
+- `--format` Output format: text (default) or json
+- `--config` Path to config file (default: ~/.jira.cfg)
+
+**Config file (~/.jira.cfg):**
+
+```
+[jira]
+url = https://your.jira.instance
+token = YOUR_ACCESS_TOKEN
+default_project = ABC
+```
+
+**Security:**
+- Protect your config file: `chmod 600 ~/.jira.cfg`
+- Access token is never logged (redacted in logs)
+
+**Output:**
+- Text: `KEY — Summary` (one per line)
+- JSON: Array of objects `{ "key": ..., "summary": ... }`
+
+</details>
+<details>
   <summary><strong>myip.py Usage</strong></summary>
 
   ```sh

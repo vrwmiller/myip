@@ -13,3 +13,5 @@ alias myopen='./myopen.sh'
 alias weather='python weather.py'
 alias randomstr='python randomstr.py'
 alias randomstrsh='./randomstr.sh'
+# Jira CLI
+alias jira='python3 /Users/vmiller/mytools/jira.py'
