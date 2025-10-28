@@ -9,15 +9,6 @@ Clone the repository and set up your environment:
 ```sh
 git clone https://github.com/vrwmiller/myip.git
 cd mytools
-source environment.sh
-```
-
-*If you already have the `requests` library installed globally, you can skip the virtual environment setup.*
-
-## Usage
-
-<details>
-  <summary><strong>weather.py Usage</strong></summary>
 
   Get a forecast, current conditions, or list nearby stations by coordinates or city/state:
 
@@ -29,14 +20,50 @@ source environment.sh
   python weather.py --lat 40.7128 --lon -74.0060 --list-stations # List stations near location
 
   # By city and state
-  python weather.py --city "New York" --state NY                 # Get 1-day forecast for New York, NY
-  python weather.py --city "New York" --state NY --days 7        # Get 7-day forecast for New York, NY
   python weather.py --city "New York" --state NY --list-stations # List stations near New York, NY
   ```
-  
-  - The `--days` option controls the number of days in the forecast (default: 1, min: 1, max: 10).
 </details>
 
+<details>
+<summary>trello.py - Search Trello cards</summary>
+
+**Usage:**
+
+```sh
+trello.py --board BOARD_ID --name "*deploy to prod*" --format json --output-file results.json
+```
+
+**Options:**
+
+- `--board` Board ID
+- `--list` List ID
+- `--member` Member ID
+- `--name` Card name pattern (wildcards supported)
+- `--log-file` Log file path (default: trello.py.log)
+- `--debug` Enable debug logging to STDOUT
+- `--max-results` Page size (not used, for compatibility)
+- `--output-file` Write results to file
+- `--format` Output format: text (default) or json
+- `--config` Path to config file (default: ~/.trello.cfg)
+
+**Config file (~/.trello.cfg):**
+
+```
+[trello]
+key = YOUR_API_KEY
+token = YOUR_API_TOKEN
+default_board = BOARD_ID
+```
+
+**Security:**
+- Protect your config file: `chmod 600 ~/.trello.cfg`
+- API token is never logged (redacted in logs)
+
+**Output:**
+- Text: `CARD_ID — Card Name` (one per line)
+- JSON: Array of objects `{ "id": ..., "name": ... }`
+
+</details>
 <details>
 <summary><strong>jira.py - Search Jira issues</strong></summary>
 

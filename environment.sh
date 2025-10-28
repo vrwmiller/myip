@@ -15,3 +15,5 @@ alias randomstr='python randomstr.py'
 alias randomstrsh='./randomstr.sh'
 # Jira CLI
 alias jira='python3 /Users/vmiller/mytools/jira.py'
+# Trello CLI
+alias trello='python3 /Users/vmiller/mytools/trello.py'
