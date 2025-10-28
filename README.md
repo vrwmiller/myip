@@ -38,7 +38,7 @@ source environment.sh
 </details>
 
 <details>
-<summary>jira.py - Search Jira issues</summary>
+<summary><strong>jira.py - Search Jira issues</strong></summary>
 
 **Usage:**
 
