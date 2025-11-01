@@ -1,4 +1,5 @@
 ## Requirements
+
 - Python 3.7 or newer
 - `requests` Python library
 
@@ -22,9 +23,34 @@ cd mytools
   # By city and state
   python weather.py --city "New York" --state NY --list-stations # List stations near New York, NY
   ```
+
 </details>
 
 <details>
+<summary>bible-verse.py - Get Bible verses</summary>
+
+**Usage:**
+
+```sh
+bible-verse                # Get a random verse from Psalms
+bible-verse --verse "John 3:16"   # Get a specific verse
+bible-verse --translation ESV      # Specify translation
+bible-verse --format json          # Output as JSON
+```
+
+**Options:**
+
+- `--verse` Specify verse reference (e.g. "John 3:16")
+- `--translation` Bible translation (default: KJV)
+- `--output-file` Write verse to file
+- `--format` Output format: text (default) or json
+
+**Output:**
+
+- Text: `REFERENCE: Verse text`
+- JSON: Full API response
+
+</details>
 <summary>trello.py - Search Trello cards</summary>
 
 **Usage:**
@@ -56,10 +82,12 @@ default_board = BOARD_ID
 ```
 
 **Security:**
+
 - Protect your config file: `chmod 600 ~/.trello.cfg`
 - API token is never logged (redacted in logs)
 
 **Output:**
+
 - Text: `CARD_ID — Card Name` (one per line)
 - JSON: Array of objects `{ "id": ..., "name": ... }`
 
@@ -95,10 +123,12 @@ default_project = ABC
 ```
 
 **Security:**
+
 - Protect your config file: `chmod 600 ~/.jira.cfg`
 - Access token is never logged (redacted in logs)
 
 **Output:**
+
 - Text: `KEY — Summary` (one per line)
 - JSON: Array of objects `{ "key": ..., "summary": ... }`
 
@@ -109,12 +139,15 @@ default_project = ABC
   ```sh
   python myip.py
   ```
+
   Output:
+
   ```text
   MyIP.com: fd00::1 (United States, US)
   ipify IPv4: 192.168.1.1
   ipify IPv6: fd00::1
   ```
+
 </details>
 
 <details>
@@ -123,7 +156,9 @@ default_project = ABC
   ```sh
   python bandsintown.py --app_id bandsintown@gmail.com --artist "tool"
   ```
+
   Output:
+
   ```text
   Artist Info:
   { ...artist info JSON... }
@@ -131,6 +166,7 @@ default_project = ABC
   Upcoming Events:
   [{ ...event JSON... }, ...]
   ```
+
 </details>
 
 <details>
@@ -140,7 +176,9 @@ default_project = ABC
   python mediawiki.py --search "Python programming" --limit 2
   python mediawiki.py --pageid 23862
   ```
+
   Output:
+
   ```text
   Title: Python (programming language)
   PageID: 23862
@@ -148,6 +186,7 @@ default_project = ABC
 
   <page content>
   ```
+
 </details>
 
 <details>
@@ -156,11 +195,14 @@ default_project = ABC
   ```sh
   python stoic.py
   ```
+
   Output:
+
   ```text
   "Waste no more time arguing what a good man should be. Be one."
   -- Marcus Aurelius
   ```
+
 </details>
 
 <details>
@@ -174,10 +216,13 @@ default_project = ABC
   python randomstr.py --exclude "abc" # Exclude characters
   randomstr --length 20 --exclude "!@#" # Using alias
   ```
+
   Output:
+
   ```text
   Generated random string: 8f$Gz@1!kL... (example)
   ```
+
 </details>
 
 <details>
@@ -191,10 +236,13 @@ default_project = ABC
   ./randomstr.sh -e "abc"       # Exclude characters
   randomstrsh -l 20 -e "!@#"    # Using alias
   ```
+
   Output:
+
   ```text
   Generated random string: 8f$Gz@1!kL... (example)
   ```
+
 </details>
 
 <details>
@@ -207,10 +255,13 @@ default_project = ABC
   python csvtransform.py --input input.csv --output output.csv
   csvtransform -i input.csv -o output.csv   # Using alias
   ```
+
   Output:
+
   ```text
   Transformed data has been written to output.csv
   ```
+
 </details>
 
 <details>
@@ -220,5 +271,6 @@ default_project = ABC
   myopen Calculator
   myopen Safari
   ```
+
   Note: Some system apps (like Calculator) may be restricted by macOS and may not allow multiple instances due to security constraints. This script checks both `/Applications` and `/System/Applications` for the app executable.
 </details>
