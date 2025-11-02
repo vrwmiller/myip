@@ -13,6 +13,10 @@ logs/*.log
 backups/*
 !backups/csvimport.backup
 
+# Ignore sensitive and config files in confs/
+confs/csvimport-*.json
+confs/csvimport.conf
+
 # Editor swap/backup files
 *.swp
 *.swo
