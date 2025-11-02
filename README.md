@@ -8,26 +8,14 @@
 Clone the repository and set up your environment:
 
 ```sh
-git clone https://github.com/vrwmiller/myip.git
+git clone https://github.com/vrwmiller/mytools.git
 cd mytools
-
-  Get a forecast, current conditions, or list nearby stations by coordinates or city/state:
-
-  ```sh
-  # By coordinates (default: 1 day, use --days 1-10 for more)
-  python weather.py --lat 40.7128 --lon -74.0060                 # Get 1-day forecast
-  python weather.py --lat 40.7128 --lon -74.0060 --days 5        # Get 5-day forecast
-  python weather.py --station KJFK                               # Get current conditions
-  python weather.py --lat 40.7128 --lon -74.0060 --list-stations # List stations near location
-
-  # By city and state
-  python weather.py --city "New York" --state NY --list-stations # List stations near New York, NY
-  ```
-
-</details>
+python3 -m venv venv
+source environment.sh
+```
 
 <details>
-<summary>bible-verse.py - Get Bible verses</summary>
+<summary><strong>bible-verse.py - Get Bible verses</strong></summary>
 
 **Usage:**
 
@@ -51,7 +39,8 @@ bible-verse --format json          # Output as JSON
 - JSON: Full API response
 
 </details>
-<summary>trello.py - Search Trello cards</summary>
+<details>
+<summary><strong>trello.py - Search Trello cards</strong></summary>
 
 **Usage:**
 
@@ -273,4 +262,30 @@ default_project = ABC
   ```
 
   Note: Some system apps (like Calculator) may be restricted by macOS and may not allow multiple instances due to security constraints. This script checks both `/Applications` and `/System/Applications` for the app executable.
+</details>
+
+<details>
+  <summary><strong>Testing with pytest</strong></summary>
+
+  To run all tests for the project:
+
+  ```sh
+  # (Recommended) Ensure dependencies are installed
+  pip install -r requirements.txt
+
+  # Run all tests in the tests/ directory
+  pytest tests/
+  # Or, if using a virtual environment:
+  ./venv/bin/python -m pytest tests/
+  ```
+
+- All test files are located in the `tests/` directory.
+- Tests cover core functions, edge cases, and integration logic.
+- Mocking is used for Google Sheets and file I/O where needed.
+- For coverage reporting, install `pytest-cov` and run:
+
+    ```sh
+    pytest --cov=csvimport tests/
+    ```
+
 </details>
