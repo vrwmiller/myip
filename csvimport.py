@@ -111,19 +111,21 @@ def fetch_sheet_entries(sheet_id: str, worksheet_name: str, creds_path: str, log
         logger.error(f"Failed to fetch records from worksheet '{worksheet_name}': {e}")
         raise
     logger.info(f"Fetched {len(rows)} entries from Google Sheet '{worksheet_name}' (ID: {sheet_id})")
-    # Only write temp CSV if debug flag is True
-    if getattr(logger, 'debug_mode', False):
-        import tempfile, csv, os
-        temp_path = os.path.join(os.getcwd(), f"google_sheet_{worksheet_name}_sample.csv")
-        if rows:
-            with open(temp_path, "w", encoding="utf-8", newline="") as f:
-                writer = csv.DictWriter(f, fieldnames=rows[0].keys())
-                writer.writeheader()
-                for row in rows:
-                    writer.writerow(row)
-            logger.debug(f"Saved Google Sheet data to temp CSV: {temp_path}")
-        else:
-            logger.debug(f"No rows to save from Google Sheet '{worksheet_name}'")
+    # Always backup Google Sheet before update
+    import csv, os, datetime
+    backup_dir = os.path.join(os.getcwd(), "backups")
+    os.makedirs(backup_dir, exist_ok=True)
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_path = os.path.join(backup_dir, f"{worksheet_name}_backup_{timestamp}.csv")
+    if rows:
+        with open(backup_path, "w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+            writer.writeheader()
+            for row in rows:
+                writer.writerow(row)
+        logger.info(f"Google Sheet backed up to: {backup_path}")
+    else:
+        logger.info(f"No rows to backup from Google Sheet '{worksheet_name}'")
     return rows
 
 # --- CSV transformation ---
