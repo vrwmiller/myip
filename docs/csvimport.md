@@ -20,7 +20,6 @@
 
 ```
 python csvimport.py --input-files <csv1,csv2,...> --org <org> [--config <config>] [--output <output.csv>] [--dry-run]
-```
 
 - `--input-files`: Comma-separated list of CSV files to merge and process
 - `--org`: Organization name for config lookup
