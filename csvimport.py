@@ -136,11 +136,29 @@ def fetch_sheet_entries(sheet_id: str, worksheet_name: str, creds_path: str, log
 
 # --- CSV transformation ---
 def transform_csv(input_path: str, output_path: str, input_format: List[str], output_format: List[str], existing_entries: Optional[List[Dict]] = None, key_columns: Optional[List[str]] = None, logger: Optional[logging.Logger] = None):
-    with open(input_path, "r", encoding="utf-8") as infile:
+    with open(input_path, "r", encoding="utf-8-sig") as infile:
         reader = csv.DictReader(infile)
         transformed_rows = []
         for row in reader:
-            new_row = {col: row.get(col, "") for col in output_format}
+            # Special transformation for nfcu org: split Amount into Debit/Credit
+            if (
+                'Debit' in output_format and 'Credit' in output_format and 'Amount' in input_format and 'Credit Debit Indicator' in input_format
+            ):
+                debit = row['Amount'] if row.get('Credit Debit Indicator') == 'Debit' else ''
+                credit = row['Amount'] if row.get('Credit Debit Indicator') == 'Credit' else ''
+                new_row = {}
+                for col in output_format:
+                    if col == 'Debit':
+                        new_row['Debit'] = debit
+                    elif col == 'Credit':
+                        new_row['Credit'] = credit
+                    elif col == 'Posting Date':
+                        # Use Posting Date from input
+                        new_row['Posting Date'] = row.get('Posting Date', '')
+                    else:
+                        new_row[col] = row.get(col, '')
+            else:
+                new_row = {col: row.get(col, "") for col in output_format}
             transformed_rows.append(new_row)
     # Remove duplicates if existing_entries and key_columns are provided
     if existing_entries and key_columns and logger:
@@ -233,7 +251,7 @@ def main():
     # Support duplicate removal from CSV or Google Sheet
     if key_columns:
         if args.existing_csv:
-            with open(args.existing_csv, "r", encoding="utf-8") as f:
+            with open(args.existing_csv, "r", encoding="utf-8-sig") as f:
                 reader = csv.DictReader(f)
                 existing_entries = [row for row in reader]
             logger.info(f"Loaded {len(existing_entries)} existing entries from CSV for duplicate removal.")
@@ -255,7 +273,7 @@ def main():
     if input_format == output_format:
         rows = []
         for input_path in input_files:
-            with open(input_path, "r", encoding="utf-8") as infile:
+            with open(input_path, "r", encoding="utf-8-sig") as infile:
                 reader = csv.DictReader(infile)
                 rows.extend([row for row in reader])
         if existing_entries and key_columns:
@@ -266,7 +284,7 @@ def main():
         # For transformation, merge all input files before processing
         all_rows = []
         for input_path in input_files:
-            with open(input_path, "r", encoding="utf-8") as infile:
+            with open(input_path, "r", encoding="utf-8-sig") as infile:
                 reader = csv.DictReader(infile)
                 all_rows.extend([row for row in reader])
         # Write merged rows to a temp file for transform_csv
