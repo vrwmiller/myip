@@ -161,7 +161,7 @@ def setup_logging(debug: bool, log_file: str = "csvimport.log") -> logging.Logge
 def main():
     parser = argparse.ArgumentParser(description="Import and transform CSV files for multiple organizations.")
     parser.add_argument("--input", required=True, help="Path to input CSV file")
-    parser.add_argument("--output", required=True, help="Path to output CSV file")
+    parser.add_argument("--output", required=False, help="Optional path to output CSV file (for debug/troubleshooting)")
     parser.add_argument("--input-format", help="Input format (comma-separated or YAML/JSON list)")
     parser.add_argument("--output-format", help="Output format (comma-separated or YAML/JSON list)")
     parser.add_argument("--config", help="Optional config file for organization formats (default: confs/csvimport.conf)")
@@ -285,8 +285,8 @@ def main():
             logger.error(f"Failed to append/sort data in Google Sheet: {e}")
             print(f"Error: Failed to append/sort data in Google Sheet: {e}", file=sys.stderr)
             sys.exit(4)
-    else:
-        # Fallback: Write deduplicated data to output CSV
+    elif getattr(args, 'output', None):
+        # Fallback: Write deduplicated data to output CSV only if --output is provided
         with open(args.output, "w", encoding="utf-8", newline="") as outfile:
             writer = csv.DictWriter(outfile, fieldnames=output_format)
             writer.writeheader()
