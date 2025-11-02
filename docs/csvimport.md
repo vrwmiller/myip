@@ -52,9 +52,11 @@ google:
   sheet_id: '1K5a1m-dhz8gQD2aUncqUPCkFlerHjQWlaCq2trDRmxI'
 ```
 
-- `input_format`/`output_format`: List of columns for import/export
+**Field explanations:**
+
+- `input_format` / `output_format`: List of columns for import/export
 - `key_fields`: Used for deduplication
-- `sheet_name`: Target sheet name for each org
+- `sheet_name`: Target sheet name for each organization
 - `extra_columns`: Optional, for additional columns
 - `category_map`: (planned) Maps imported category values to desired values
 - `google.creds`: Path to Google API credentials JSON
