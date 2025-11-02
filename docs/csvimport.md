@@ -53,12 +53,14 @@ organizations:
 
 ```mermaid
 flowchart TD
-  A["Download CSV files"] --> B["Merge input files"]
-  B --> C["Transform & map columns (per org config)"]
-  C --> D["Deduplicate against existing records"]
-  D --> E["Backup current target data store"]
-  E --> F["Import new data"]
-  F --> G["Sort & finalize (optional)"]
+  A[Download CSV files] --> B[Merge input files]
+  B --> C{Do formats match?}
+  C -- Yes --> D[Skip transformation]
+  C -- No --> E[Transform merged CSVs]
+  D --> F[Backup current target]
+  E --> F[Backup current target]
+  F --> G[Deduplicate against existing records]
+  G --> H[Import to target]
 ```
 
 ## Testing
