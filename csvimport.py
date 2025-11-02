@@ -140,7 +140,7 @@ def transform_csv(input_path: str, output_path: str, input_format: List[str], ou
         reader = csv.DictReader(infile)
         transformed_rows = []
         for row in reader:
-            # Special transformation for nfcu org: split Amount into Debit/Credit
+            # Special transform rules for excepted org: split Amount into Debit/Credit
             if (
                 'Debit' in output_format and 'Credit' in output_format and 'Amount' in input_format and 'Credit Debit Indicator' in input_format
             ):
