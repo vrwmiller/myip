@@ -2,7 +2,7 @@
 
 ```mermaid
 flowchart TD
-    A[Download CSV file(s)] --> B[Merge input files]
+    A[Download CSV files] --> B[Merge input files]
     B --> C{Do formats match?}
     C -- Yes --> D[Skip transformation]
     C -- No --> E[Transform merged CSVs]
