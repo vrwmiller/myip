@@ -13,11 +13,11 @@ Usage:
 
 Options:
   --input-files INPUT1.csv,INPUT2.csv  Comma-separated list of input CSV files
-  --output OUTPUT.csv         Path to output (transformed) CSV file
-  --input-format FORMAT       Input format specification (e.g., column order or names)
-  --output-format FORMAT      Output format specification (e.g., column order or names)
-  --config CONFIG             Optional config file for organization-specific formats
-  --org ORG          Organization name (for config lookup)
+  --output OUTPUT.csv                  Path to output (transformed) CSV file
+  --input-format FORMAT                Input format specification (e.g., column order or names)
+  --output-format FORMAT               Output format specification (e.g., column order or names)
+  --config CONFIG                      Optional config file for organization-specific formats
+  --org ORG                            Organization name (for config lookup)
 
 """
 

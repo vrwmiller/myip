@@ -1,8 +1,8 @@
-# CSV Import Workflow
+# csvimport Workflow
 
 ```mermaid
 flowchart TD
-    A[Download one or more CSV files] --> B[Merge input files]
+    A[Download CSV file(s)] --> B[Merge input files]
     B --> C{Do formats match?}
     C -- Yes --> D[Skip transformation]
     C -- No --> E[Transform merged CSVs]
