@@ -274,3 +274,28 @@ default_project = ABC
 
   Note: Some system apps (like Calculator) may be restricted by macOS and may not allow multiple instances due to security constraints. This script checks both `/Applications` and `/System/Applications` for the app executable.
 </details>
+
+<details>
+  <summary><strong>Testing with pytest</strong></summary>
+
+  To run all tests for the project:
+
+  ```sh
+  # (Recommended) Ensure dependencies are installed
+  pip install -r requirements.txt
+
+  # Run all tests in the tests/ directory
+  pytest tests/
+  # Or, if using a virtual environment:
+  ./venv/bin/python -m pytest tests/
+  ```
+
+  - All test files are located in the `tests/` directory.
+  - Tests cover core functions, edge cases, and integration logic.
+  - Mocking is used for Google Sheets and file I/O where needed.
+  - For coverage reporting, install `pytest-cov` and run:
+    ```sh
+    pytest --cov=csvimport tests/
+    ```
+
+</details>

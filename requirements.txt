@@ -1,3 +1,4 @@
+pytest
 requests==2.32.5
 certifi==2025.10.5
 charset_normalizer==3.4.4
