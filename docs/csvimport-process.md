@@ -2,17 +2,21 @@
 
 ```mermaid
 flowchart TD
-    A[Download CSV file] --> B[Invoke csvtransform on the CSV]
-    B --> C[Open transformed CSV]
-    C --> D[Open target Google Sheet]
-    D --> E[Compare and remove duplicates from transformed CSV]
-    E --> F[Import transformed CSV to target Google Sheet]
-    F --> G[Sort Google sheets column 1 in reverse chronological order]
-    subgraph Alternative Path
-        H[If source and target formats match, skip csvtransform]
-        H --> C
-    end
-    A --> H
+    A[Download one or more CSV files] --> B[Merge input files]
+    B --> C{Do formats match?}
+    C -- Yes --> D[Skip transformation]
+    C -- No --> E[Transform merged CSVs]
+    D --> F[Backup current Google Sheet]
+    E --> F[Backup current Google Sheet]
+    F --> G[Deduplicate against Sheet]
+    G --> H[Import to Google Sheet]
 ```
 
-This chart visualizes the process for importing and transforming CSV files for multiple organizations, including duplicate removal and Google Sheets integration.
+This chart visualizes the process for importing and transforming multiple CSV files for organizations, including merging, deduplication, automated Google Sheet backup, and Google Sheets integration.
+
+**Key workflow updates:**
+
+- Use `--input-files` to specify a comma-separated list of CSVs to merge and process.
+- Before any update, the current Google Sheet is backed up to `backups/` with a timestamped filename.
+- Deduplication compares merged input data against the latest Google Sheet records.
+- Data is imported and sorted in the target Google Sheet.
