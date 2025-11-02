@@ -32,22 +32,33 @@ python csvimport.py --input-files <csv1,csv2,...> --org <org> [--config <config>
 
 ## Configuration
 
-The config file (`confs/csvimport.conf`) defines formats and rules per organization:
+The config file (`confs/csvimport.conf`) defines formats, rules, and Google Sheets settings per organization. Example:
 
 ```yaml
 organizations:
+  chase:
+    input_format: ["Transaction Date", "Post Date", "Description", "Category", "Type", "Amount", "Memo"]
+    output_format: ["Transaction Date", "Post Date", "Description", "Category", "Type", "Amount", "Memo"]
+    key_fields: ["Description", "Amount", "Transaction Date", "Post Date"]
+    sheet_name: "chase"
+    extra_columns: ["", "", "2025"]
   nfcu:
-    input_format: [ ... ]
-    output_format: [ ... ]
-    key_fields: [ ... ]
-    sheet_name: "nfcutest"
-    category_map:
-      "OldCategory": "NewCategory"
+    input_format: ["Posting Date", "Transaction Date", "Amount", "Credit Debit Indicator", "type", "Type Group", "Reference", "Instructed Currency", "Currency Exchange Rate", "Instructed Amount", "Description", "Category", "Check Serial Number", "Card Ending"]
+    output_format: ["Posting Date", "Check Serial Number", "Description", "Debit", "Credit", "Category", "Amount", "Credit Debit Indicator", "type", "Type Group", "Reference", "Instructed Currency", "Currency Exchange Rate", "Instructed Amount", "Card Ending"]
+    key_fields: ["Description", "Instructed Amount", "Check Serial Number", "Posting Date"]
+    sheet_name: "nfcu"
+google:
+  creds: 'confs/csvimport-476923-787c2f744ee5.json'
+  sheet_id: '1K5a1m-dhz8gQD2aUncqUPCkFlerHjQWlaCq2trDRmxI'
 ```
 
 - `input_format`/`output_format`: List of columns for import/export
 - `key_fields`: Used for deduplication
+- `sheet_name`: Target sheet name for each org
+- `extra_columns`: Optional, for additional columns
 - `category_map`: (planned) Maps imported category values to desired values
+- `google.creds`: Path to Google API credentials JSON
+- `google.sheet_id`: Target Google Sheet ID
 
 ## Workflow
 
