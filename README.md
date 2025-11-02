@@ -51,6 +51,7 @@ bible-verse --format json          # Output as JSON
 - JSON: Full API response
 
 </details>
+<details>
 <summary>trello.py - Search Trello cards</summary>
 
 **Usage:**
@@ -290,10 +291,11 @@ default_project = ABC
   ./venv/bin/python -m pytest tests/
   ```
 
-  - All test files are located in the `tests/` directory.
-  - Tests cover core functions, edge cases, and integration logic.
-  - Mocking is used for Google Sheets and file I/O where needed.
-  - For coverage reporting, install `pytest-cov` and run:
+- All test files are located in the `tests/` directory.
+- Tests cover core functions, edge cases, and integration logic.
+- Mocking is used for Google Sheets and file I/O where needed.
+- For coverage reporting, install `pytest-cov` and run:
+
     ```sh
     pytest --cov=csvimport tests/
     ```
