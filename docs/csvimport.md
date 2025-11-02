@@ -51,13 +51,15 @@ organizations:
 
 ## Workflow
 
-1. Download one or more CSV files
-2. Merge input files
-3. Transform and map columns per org config
-4. Deduplicate against existing records
-5. Backup current target data store
-6. Import new data
-7. (Optional) Sort and finalize
+```mermaid
+flowchart TD
+  A["Download CSV files"] --> B["Merge input files"]
+  B --> C["Transform & map columns (per org config)"]
+  C --> D["Deduplicate against existing records"]
+  D --> E["Backup current target data store"]
+  E --> F["Import new data"]
+  F --> G["Sort & finalize (optional)"]
+```
 
 ## Testing
 
