@@ -1,3 +1,3 @@
-clean:
+csvimport-clean:
 	rm -f INPUT.csv OUTPUT.csv
-	rm -f logs/*
+	rm -f logs/csvimport.log
