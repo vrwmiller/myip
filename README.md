@@ -8,26 +8,15 @@
 Clone the repository and set up your environment:
 
 ```sh
-git clone https://github.com/vrwmiller/myip.git
+git clone https://github.com/vrwmiller/mytools.git
 cd mytools
-
-  Get a forecast, current conditions, or list nearby stations by coordinates or city/state:
-
-  ```sh
-  # By coordinates (default: 1 day, use --days 1-10 for more)
-  python weather.py --lat 40.7128 --lon -74.0060                 # Get 1-day forecast
-  python weather.py --lat 40.7128 --lon -74.0060 --days 5        # Get 5-day forecast
-  python weather.py --station KJFK                               # Get current conditions
-  python weather.py --lat 40.7128 --lon -74.0060 --list-stations # List stations near location
-
-  # By city and state
-  python weather.py --city "New York" --state NY --list-stations # List stations near New York, NY
-  ```
-
-</details>
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
 <details>
-<summary>bible-verse.py - Get Bible verses</summary>
+<summary><strong>bible-verse.py - Get Bible verses</strong></summary>
 
 **Usage:**
 
@@ -52,7 +41,7 @@ bible-verse --format json          # Output as JSON
 
 </details>
 <details>
-<summary>trello.py - Search Trello cards</summary>
+<summary><strong>trello.py - Search Trello cards</strong></summary>
 
 **Usage:**
 
