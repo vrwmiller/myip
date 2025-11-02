@@ -289,3 +289,27 @@ default_project = ABC
     ```
 
 </details>
+
+<details>
+<summary><strong>csvimport.py - Import and transform CSV files</strong></summary>
+
+**Usage:**
+
+```sh
+python csvimport.py --input-files file1.csv,file2.csv --output OUTPUT.csv --input-format "col1,col2,..." --output-format "col1,col2,..." --org ORGNAME [--config confs/csvimport.conf]
+```
+
+**Options:**
+
+- `--input-files`: Comma-separated list of input CSV files to merge and process
+- `--output`: Output CSV file (optional, for debug/troubleshooting)
+- `--input-format`, `--output-format`: Specify column order/names for input and output
+- `--org`: Organization name for config lookup
+- `--config`: Optional config file for organization formats
+- Other options: see `python csvimport.py --help`
+
+**Description:**
+
+Import and transform multiple CSV files for an organization. All input files will be merged and deduplicated before transformation and output.
+
+</details>

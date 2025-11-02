@@ -3,10 +3,10 @@
 csvimport.py - Import and transform CSV files for multiple organizations, with flexible format mapping and duplicate removal support.
 
 Usage:
-  python csvimport.py --input INPUT.csv --output OUTPUT.csv --input-format FORMAT --output-format FORMAT [--config CONFIG]
+    python csvimport.py --input-files INPUT1.csv,INPUT2.csv --output OUTPUT.csv --input-format FORMAT --output-format FORMAT [--config CONFIG]
 
 Options:
-  --input INPUT.csv           Path to input CSV file
+    --input-files INPUT1.csv,INPUT2.csv  Comma-separated list of input CSV files
   --output OUTPUT.csv         Path to output (transformed) CSV file
   --input-format FORMAT       Input format specification (e.g., column order or names)
   --output-format FORMAT      Output format specification (e.g., column order or names)
@@ -161,7 +161,7 @@ def setup_logging(debug: bool, log_file: str = "csvimport.log") -> logging.Logge
 # --- Main CLI ---
 def main():
     parser = argparse.ArgumentParser(description="Import and transform CSV files for multiple organizations.")
-    parser.add_argument("--input", required=True, help="Path to input CSV file")
+    parser.add_argument("--input-files", required=True, help="Comma-separated list of input CSV files")
     parser.add_argument("--output", required=False, help="Optional path to output CSV file (for debug/troubleshooting)")
     parser.add_argument("--input-format", help="Input format (comma-separated or YAML/JSON list)")
     parser.add_argument("--output-format", help="Output format (comma-separated or YAML/JSON list)")
@@ -178,7 +178,8 @@ def main():
     args = parser.parse_args()
 
     logger = setup_logging(args.debug, args.log_file)
-    logger.info(f"Starting csvimport for input: {args.input}, output: {args.output}")
+    input_files = [f.strip() for f in args.input_files.split(",")]
+    logger.info(f"Starting csvimport for input files: {input_files}, output: {args.output}")
 
     # Default config path if not specified
     config_path = args.config if args.config else "confs/csvimport.conf"
@@ -244,15 +245,31 @@ def main():
     # Always deduplicate, even if formats are the same
     # Transform and deduplicate rows
     if input_format == output_format:
-        with open(args.input, "r", encoding="utf-8") as infile:
-            reader = csv.DictReader(infile)
-            rows = [row for row in reader]
+        rows = []
+        for input_path in input_files:
+            with open(input_path, "r", encoding="utf-8") as infile:
+                reader = csv.DictReader(infile)
+                rows.extend([row for row in reader])
         if existing_entries and key_columns:
             deduped_rows = remove_duplicates(rows, existing_entries, key_columns, logger)
         else:
             deduped_rows = rows
     else:
-        deduped_rows = transform_csv(args.input, args.output, input_format, output_format, existing_entries, key_columns, logger)
+        # For transformation, merge all input files before processing
+        all_rows = []
+        for input_path in input_files:
+            with open(input_path, "r", encoding="utf-8") as infile:
+                reader = csv.DictReader(infile)
+                all_rows.extend([row for row in reader])
+        # Write merged rows to a temp file for transform_csv
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode="w+", delete=False, newline="", encoding="utf-8") as temp_in:
+            writer = csv.DictWriter(temp_in, fieldnames=input_format)
+            writer.writeheader()
+            for row in all_rows:
+                writer.writerow(row)
+            temp_in_path = temp_in.name
+        deduped_rows = transform_csv(temp_in_path, args.output, input_format, output_format, existing_entries, key_columns, logger)
 
     # Google Sheets integration: append deduplicated data and sort
     if sheet_name and sheet_id and creds_path:
