@@ -9,8 +9,11 @@ env.bak/
 logs/
 logs/*.log
 *.log
-confs/
+# Do not ignore confs/ directory itself
+!confs/
+# Ignore .conf files in confs/ except those containing 'sample'
 confs/*.conf
+!confs/*sample*.conf
 confs/csvimport-*.json
 *.conf
 *.csv

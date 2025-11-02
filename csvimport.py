@@ -111,8 +111,8 @@ def fetch_sheet_entries(sheet_id: str, worksheet_name: str, creds_path: str, log
         logger.error(f"Failed to fetch records from worksheet '{worksheet_name}': {e}")
         raise
     logger.info(f"Fetched {len(rows)} entries from Google Sheet '{worksheet_name}' (ID: {sheet_id})")
-    # If debug logging is enabled, save a temp CSV of the sheet data
-    if any(isinstance(h, logging.StreamHandler) for h in logger.handlers):
+    # Only write temp CSV if debug flag is True
+    if getattr(logger, 'debug_mode', False):
         import tempfile, csv, os
         temp_path = os.path.join(os.getcwd(), f"google_sheet_{worksheet_name}_sample.csv")
         if rows:
@@ -143,6 +143,7 @@ def transform_csv(input_path: str, output_path: str, input_format: List[str], ou
 def setup_logging(debug: bool, log_file: str = "csvimport.log") -> logging.Logger:
     logger = logging.getLogger("csvimport")
     logger.setLevel(logging.DEBUG if debug else logging.INFO)
+    logger.debug_mode = debug
     for h in list(logger.handlers):
         logger.removeHandler(h)
     formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
