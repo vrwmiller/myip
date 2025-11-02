@@ -9,9 +9,7 @@
 - Organization-specific input/output formats via config file
 - Multi-file CSV merging
 - Deduplication against existing records
-- Automated backup before update
-- Google Sheets integration (no static sensitive data)
-- Dry-run mode (planned)
+
 - Category field mapping (planned)
 - Logging and error handling
 - Testable with pytest
@@ -30,10 +28,6 @@ python csvimport.py --input-files <csv1,csv2,...> --org <org> [--config <config>
 - `--output`: Optional output CSV file
 - `--dry-run`: Preview changes without modifying the target data store
 
-### Example
-
-```
-python csvimport.py --input-files "file1.csv,file2.csv" --org nfcu --config confs/csvimport.conf
 ```
 
 ## Configuration
