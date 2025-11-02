@@ -9,13 +9,13 @@ env.bak/
 logs/
 logs/*.log
 *.log
-confs/
-confs/*.conf
+# Ignore everything in backups/ except csvimport.backup
+backups/*
+!backups/csvimport.backup
+
+# Ignore sensitive and config files in confs/
 confs/csvimport-*.json
-*.conf
-*.csv
-*.CSV
-csvimport-*.json
+confs/csvimport.conf
 
 # Editor swap/backup files
 *.swp
