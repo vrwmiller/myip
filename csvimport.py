@@ -3,15 +3,21 @@
 csvimport.py - Import and transform CSV files for multiple organizations, with flexible format mapping and duplicate removal support.
 
 Usage:
-    python csvimport.py --input-files INPUT1.csv,INPUT2.csv --output OUTPUT.csv --input-format FORMAT --output-format FORMAT [--config CONFIG]
+    python csvimport.py \
+        --input-files INPUT1.csv,INPUT2.csv \
+        --org ORG \
+        [ --output OUTPUT.csv ]\
+        [ --input-format FORMAT ] \
+        [ --output-format FORMAT ] \
+        [ --config CONFIG ]
 
 Options:
-    --input-files INPUT1.csv,INPUT2.csv  Comma-separated list of input CSV files
+  --input-files INPUT1.csv,INPUT2.csv  Comma-separated list of input CSV files
   --output OUTPUT.csv         Path to output (transformed) CSV file
   --input-format FORMAT       Input format specification (e.g., column order or names)
   --output-format FORMAT      Output format specification (e.g., column order or names)
   --config CONFIG             Optional config file for organization-specific formats
-  --organization ORG          Organization name (for config lookup)
+  --org ORG          Organization name (for config lookup)
 
 """
 
