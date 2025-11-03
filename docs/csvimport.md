@@ -35,20 +35,20 @@ The config file (`confs/csvimport.conf`) defines formats, rules, and Google Shee
 
 ```yaml
 organizations:
-  chase:
+  thebank:
     input_format: ["Transaction Date", "Post Date", "Description", "Category", "Type", "Amount", "Memo"]
     output_format: ["Transaction Date", "Post Date", "Description", "Category", "Type", "Amount", "Memo"]
     key_fields: ["Description", "Amount", "Transaction Date", "Post Date"]
-    sheet_name: "chase"
+    sheet_name: "sheet1"
     extra_columns: ["", "", "2025"]
-  nfcu:
+  anotherbank:
     input_format: ["Posting Date", "Transaction Date", "Amount", "Credit Debit Indicator", "type", "Type Group", "Reference", "Instructed Currency", "Currency Exchange Rate", "Instructed Amount", "Description", "Category", "Check Serial Number", "Card Ending"]
     output_format: ["Posting Date", "Check Serial Number", "Description", "Debit", "Credit", "Category", "Amount", "Credit Debit Indicator", "type", "Type Group", "Reference", "Instructed Currency", "Currency Exchange Rate", "Instructed Amount", "Card Ending"]
     key_fields: ["Description", "Instructed Amount", "Check Serial Number", "Posting Date"]
-    sheet_name: "nfcu"
+    sheet_name: "sheet1"
 google:
-  creds: 'confs/csvimport-476923-787c2f744ee5.json'
-  sheet_id: '1K5a1m-dhz8gQD2aUncqUPCkFlerHjQWlaCq2trDRmxI'
+  creds: 'confs/google.json'
+  sheet_id: 'sheet_id'
 ```
 
 **Field explanations:**
