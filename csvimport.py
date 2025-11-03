@@ -172,7 +172,12 @@ def setup_logging(debug: bool, log_file: str = "csvimport.log") -> logging.Logge
     logger.debug_mode = debug
     for h in list(logger.handlers):
         logger.removeHandler(h)
+    import os
     formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
+    # Ensure parent directory exists for log file
+    log_dir = os.path.dirname(log_file)
+    if log_dir and not os.path.exists(log_dir):
+        os.makedirs(log_dir, exist_ok=True)
     fh = logging.FileHandler(log_file)
     fh.setLevel(logging.DEBUG)
     fh.setFormatter(formatter)
